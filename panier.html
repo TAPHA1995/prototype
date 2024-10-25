@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Votre Panier</h1>
+    </header>
+
+    <main>
+        <section class="cart-section">
+            <h2>Détails de votre commande</h2>
+
+            <div class="cart-item" data-price="2000">
+                <img src="fastfood/téléchargement (1).jfif" alt="Produit 1" class="product-img">
+                <div class="product-details">
+                    <h3>Burger Classique</h3>
+                    <p>Prix : 2000 Cfa</p>
+                    <label for="quantity-1">Quantité :</label>
+                    <input type="number" id="quantity-1" name="quantity-1" value="1" min="1" class="quantity-input">
+                </div>
+                <button class="remove-btn">Retirer</button>
+            </div>
+
+            <div class="cart-item" data-price="2999">
+                <img src="fastfood/téléchargement (2).jfif" alt="Produit 2" class="product-img">
+                <div class="product-details">
+                    <h3>Frites</h3>
+                    <p>Prix : 2999 CFA</p>
+                    <label for="quantity-2">Quantité :</label>
+                    <input type="number" id="quantity-2" name="quantity-2" value="1" min="1" class="quantity-input">
+                </div>
+                <button class="remove-btn">Retirer</button>
+            </div>
+
+            <div class="cart-item" data-price="1500">
+                <img src="fastfood/téléchargement (3).jfif" alt="Produit 3" class="product-img">
+                <div class="product-details">
+                    <h3>Soda</h3>
+                    <p>Prix : 1500 Cfa</p>
+                    <label for="quantity-3">Quantité :</label>
+                    <input type="number" id="quantity-3" name="quantity-3" value="1" min="1" class="quantity-input">
+                </div>
+                <button class="remove-btn">Retirer</button>
+            </div>
+
+            <div class="cart-summary">
+                <h3>Total : <span id="total-price">3990 Cfa</span></h3>
+                <button class="checkout-btn"> <a href="checkout.html">Passer à la caisse</a></button>
+            </div>
+        </section>
+    </main>
+
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #ff5722;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .cart-section {
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+
+        .product-details h3 {
+            margin-bottom: 5px;
+        }
+
+        .product-details p {
+            margin-bottom: 10px;
+        }
+
+        .cart-item input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .remove-btn {
+            padding: 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+
+        .cart-summary {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cart-summary h3 {
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            padding: 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .checkout-btn:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ff5722;
+            color: white;
+            margin-top: 20px;
+        }
+        .cart-summary a{
+            text-decoration: none;
+            color: #ffffff;
+        }
+    </style>
+
+    <script>
+        const quantityInputs = document.querySelectorAll('.quantity-input');
+        const removeButtons = document.querySelectorAll('.remove-btn');
+        const totalPriceElement = document.getElementById('total-price');
+
+        // Fonction pour recalculer le total
+        function updateTotal() {
+            let total = 0;
+            const cartItems = document.querySelectorAll('.cart-item');
+            cartItems.forEach(item => {
+                const price = parseFloat(item.getAttribute('data-price'));
+                const quantity = item.querySelector('.quantity-input').value;
+                total += price * quantity;
+            });
+            totalPriceElement.textContent = total.toFixed(2) + ' Cfa';
+        }
+
+        // Écouteur de changement de quantité
+        quantityInputs.forEach(input => {
+            input.addEventListener('change', function () {
+                if (this.value < 1) {
+                    this.value = 1; // Empêche les quantités inférieures à 1
+                }
+                updateTotal();
+            });
+        });
+
+        // Écouteur pour retirer un produit
+        removeButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                this.closest('.cart-item').remove();
+                updateTotal(); // Recalculer le total après suppression
+            });
+        });
+
+        // Initialiser le total au chargement
+        updateTotal();
+    </script>
+</body>
+</html>

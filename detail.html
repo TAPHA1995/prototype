@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast-Food Express - Produits</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Fast-Food Express</h1>
+        <button class="cart-button"><a href="panier.html">Votre Panier</a>(<span id="cart-count">0</span>)</button>
+    </header>
+
+    <main>
+        <section class="product-list">
+            <h2>Nos Aliments</h2>
+            <div class="cards-container">
+                <!-- Card 1 -->
+                <div class="card">
+                    <img src="fastfood/téléchargement.jfif" alt="Burger" class="product-image">
+                    <h3>Burger Classique</h3>
+                    <p>Un délicieux burger avec steak, fromage, salade, tomate, et sauce spéciale.</p>
+                    <p>Prix: 2 952 CFA</p>
+                    <div class="quantity">
+                        <button class="quantity-btn" onclick="decreaseQuantity('burger')">-</button>
+                        <input type="number" id="burger-qty" value="1" min="1" readonly>
+                        <button class="quantity-btn" onclick="increaseQuantity('burger')">+</button>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('burger', 2952)">Ajouter au panier</button>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <img src="fastfood/téléchargement (1).jfif" alt="Frites" class="product-image">
+                    <h3>Frites</h3>
+                    <p>Frites croustillantes avec une touche de sel.</p>
+                    <p>Prix: 1 312 CFA</p>
+                    <div class="quantity">
+                        <button class="quantity-btn" onclick="decreaseQuantity('fries')">-</button>
+                        <input type="number" id="fries-qty" value="1" min="1" readonly>
+                        <button class="quantity-btn" onclick="increaseQuantity('fries')">+</button>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('fries', 1312)">Ajouter au panier</button>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <img src="fastfood/téléchargement (3).jfif" alt="Nuggets" class="product-image">
+                    <h3>Nuggets de Poulet</h3>
+                    <p>Petites bouchées croustillantes de poulet pané.</p>
+                    <p>Prix: 1 968 CFA</p>
+                    <div class="quantity">
+                        <button class="quantity-btn" onclick="decreaseQuantity('nuggets')">-</button>
+                        <input type="number" id="nuggets-qty" value="1" min="1" readonly>
+                        <button class="quantity-btn" onclick="increaseQuantity('nuggets')">+</button>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('nuggets', 1968)">Ajouter au panier</button>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card">
+                    <img src="fastfood/téléchargement (4).jfif" alt="Soda" class="product-image">
+                    <h3>Soda</h3>
+                    <p>Boisson gazeuse rafraîchissante.</p>
+                    <p>Prix: 984 CFA</p>
+                    <div class="quantity">
+                        <button class="quantity-btn" onclick="decreaseQuantity('soda')">-</button>
+                        <input type="number" id="soda-qty" value="1" min="1" readonly>
+                        <button class="quantity-btn" onclick="increaseQuantity('soda')">+</button>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart('soda', 984)">Ajouter au panier</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Fast-Food Express</p>
+    </footer>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #ff5722;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .cart-button {
+            margin-left: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .cart-button a{
+            text-decoration: none;
+            color: #ffffff;
+        }
+        .cart-button:hover {
+            background-color: #0056b3;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .product-list {
+            text-align: center;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-image {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .quantity {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .quantity input {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+
+        .quantity-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .quantity-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .add-to-cart-btn {
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ff5722;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+
+    <script>
+        function increaseQuantity(productId) {
+            const input = document.getElementById(productId + '-qty');
+            input.value = parseInt(input.value) + 1;
+        }
+
+        function decreaseQuantity(productId) {
+            const input = document.getElementById(productId + '-qty');
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+
+        function addToCart(productId, price) {
+            const quantity = document.getElementById(productId + '-qty').value;
+            alert(quantity + ' x ' + productId + ' ajouté au panier pour un total de ' + (price * quantity) + ' CFA');
+            // Logique pour ajouter au panier (non implémentée ici)
+        }
+    </script>
+</body>
+</html>
